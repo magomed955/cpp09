@@ -6,20 +6,21 @@
 /*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 15:56:38 by mmutsulk          #+#    #+#             */
-/*   Updated: 2026/09/07 17:18:17 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2026/10/05 11:31:27 by mmutsulk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <list>
 #include <stack>
 #include <string>
 
 class RPN
 {
     private:
-        std::stack<int> _stack;
+        std::stack<int, std::list<int> > _stack;
 
         bool isOperator(const std::string &token) const;
         bool isNumber(const std::string &token) const;

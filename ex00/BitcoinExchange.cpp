@@ -6,7 +6,7 @@
 /*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 14:53:38 by mmutsulk          #+#    #+#             */
-/*   Updated: 2026/09/03 16:05:58 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2026/10/05 11:18:49 by mmutsulk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <fstream>
 #include <sstream>
 #include <stdlib.h>
+#include <cctype>
+#include <stdexcept>
 
 BitcoinExchange::BitcoinExchange()
 {   
@@ -152,6 +154,7 @@ void BitcoinExchange::processInputFile(const std::string &filename)
         std::string date;
         std::string sep;
         std::string valueStr;
+        std::string extra;
 
         ss >> date >> sep >> valueStr;
 
@@ -159,6 +162,12 @@ void BitcoinExchange::processInputFile(const std::string &filename)
         {
             std::cerr << "Error: bad input => " << line << std::endl;
             continue;
+        }
+
+        if (ss >> extra)
+        {
+	        std::cerr << "Error: bad input => " << line << std::endl;
+	        continue;
         }
 
         if (!isValidDate(date))

@@ -6,7 +6,7 @@
 /*   By: mmutsulk <mmutsulk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/03 15:56:30 by mmutsulk          #+#    #+#             */
-/*   Updated: 2026/09/07 17:43:51 by mmutsulk         ###   ########.fr       */
+/*   Updated: 2026/09/30 14:50:59 by mmutsulk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,7 @@ RPN::~RPN()
 
 bool RPN::isNumber(const std::string &token) const
 {
-    if (token.empty())
-        return false;
-
-    size_t i = 0;
-    if (token[0] == '-' && token.size() > 1)
-        i = 1;
-
-    for (; i < token.size(); i++)
-    {
-        if (!isdigit(token[i]))
-            return false;
-    }
-    return true;
+    return (token.size() == 1 && isdigit(token[0]));
 }
 
 bool RPN::isOperator(const std::string &token) const
@@ -59,7 +47,7 @@ bool RPN::isOperator(const std::string &token) const
         return false;
     if (token[0] != '+' && token[0] != '-' && token[0] != '*' && token[0] != '/')
         return false;
-    return true;
+    return true; 
 }
 
 int RPN::applyOperator(int a, int b, char op) const
@@ -99,7 +87,7 @@ int RPN::solve(const std::string &expression)
             _stack.pop();
             int a = _stack.top();
             _stack.pop();
-
+ 
             _stack.push(applyOperator(a, b, token[0]));
         }
         else
@@ -113,3 +101,4 @@ int RPN::solve(const std::string &expression)
 
     return (_stack.top());
 }
+
